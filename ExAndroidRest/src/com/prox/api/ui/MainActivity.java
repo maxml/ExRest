@@ -8,12 +8,10 @@ import retrofit.client.Response;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.prox.api.ProxApi;
 import com.prox.api.R;
@@ -36,12 +34,34 @@ public class MainActivity extends Activity {
 					@Override
 					protected Void doInBackground(Void... params) {
 						getContributors();
+						getTotalVisitors();
+						getVenueVisitLength();
 						return null;
 					}
 				}.execute();
 
 			}
 		});
+	}
+
+	private void getTotalVisitors() {
+		try {
+			ProxApi.getTotalVisitors();
+		} catch (RetrofitError e) {
+			System.out.println(e.getResponse().getStatus());
+			System.out.println(e.getUrl());
+
+		}
+	}
+
+	private void getVenueVisitLength() {
+		try {
+			ProxApi.getVenueVisitLength();
+		} catch (RetrofitError e) {
+			System.out.println(e.getResponse().getStatus());
+			System.out.println(e.getUrl());
+
+		}
 	}
 
 	private void getContributors() {

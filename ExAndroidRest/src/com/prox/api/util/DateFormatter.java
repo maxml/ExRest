@@ -9,8 +9,8 @@ public class DateFormatter {
 
 	public static String format(Date date) {
 		TimeZone tz = TimeZone.getTimeZone("UTC");
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'", Locale.US);
-		df.setTimeZone(tz);
-		return df.format(date);
+		SimpleDateFormat ISO8601DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.GERMANY);
+		ISO8601DATEFORMAT.setTimeZone(tz);
+		return ISO8601DATEFORMAT.format(date);
 	}
 }

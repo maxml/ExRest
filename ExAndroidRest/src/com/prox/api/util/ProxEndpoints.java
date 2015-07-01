@@ -1,15 +1,8 @@
 package com.prox.api.util;
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
-import retrofit.Callback;
-import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import android.util.Base64;
-
-import com.prox.api.test.GitHubClientTest.Contributor;
 
 public class ProxEndpoints {
 
@@ -19,12 +12,8 @@ public class ProxEndpoints {
 
 	public static String getApplicationId() {
 		String res = null;
-		try {
-			byte[] data = (CLIENT_KEY + ":" + APPLICATION_ID).getBytes("UTF-8");
-			res = Base64.encodeToString(data, Base64.DEFAULT);
-		} catch (UnsupportedEncodingException e1) {
-			// nothing interesting
-		}
+		byte[] data = (CLIENT_KEY + ":" + APPLICATION_ID).getBytes();
+		res = Base64.encodeToString(data, Base64.DEFAULT);
 		return res;
 	}
 
@@ -33,9 +22,14 @@ public class ProxEndpoints {
 		String totalUniqueVisitors(@Path("application_id") String applicationId,
 				@Path("start_date") String startDate, @Path("end_date") String endDate);
 
-		@GET("/repos/{owner}/{repo}/contributors")
-		void contributors(@Path("owner") String owner, @Path("repo") String repo,
-				Callback<List<Contributor>> callback);
+		@POST("/{application_id}/totvisits/{start_date}/{end_date}")
+		String totalVisitors(@Path("application_id") String applicationId,
+				@Path("start_date") String startDate, @Path("end_date") String endDate);
+
+		@POST("/{application_id}/totvisitlen/{start_date}/{end_date}")
+		String venueVisitLength(@Path("application_id") String applicationId,
+				@Path("start_date") String startDate, @Path("end_date") String endDate);
+
 	}
 
 	// old version
