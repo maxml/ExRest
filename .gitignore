@@ -25,3 +25,6 @@ proguard/
 
 # Log Files
 *.log
+/ExRestNetbeans/nbproject/private/
+/ExRestNetbeans/dist/
+/ExMavenRest/target/
